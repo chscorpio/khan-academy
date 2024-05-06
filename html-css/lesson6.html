@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <style>
+            body {
+                background-color: lightgray;
+                font-size: 16px;
+            }
+            h1 {
+                color: green;
+                position: fixed;
+                top: 50px;
+                left: 10px;
+            }
+            h2 {
+                color: rgb(0, 128, 0);
+                font-size: 1.5em;
+            }
+            h3 {
+                color: #008000;
+                font-family: serif;
+            }
+            h4 {
+                font-family: monospace;
+            }
+            p {
+                color: white;
+                font-family: "Helvetica", sans-serif;
+            }
+            #unique-identifier-selector {
+                background-color: purple;
+                font-family: fantasy;
+                font-size: 13px;
+                font-style: italic;
+                line-height: 1.5em;
+                text-align: center;
+                text-decoration: underline;
+            }
+            .common-class-name-selector {
+                color: yellow;
+                font-family: cursive;
+                text-decoration: none;
+            }
+            tbody {
+                /* The td elements under tbody will inherit these properties */
+                font: italic 13px fantasy;
+                text-align: right;
+            }
+            .rosy {
+                color: rosybrown;
+            }
+            .box {
+                background-color: green;
+                width: 70%;
+                height: 620px;
+                overflow: auto;
+                margin: 15px 0px 10px 6px;
+                border: 2px dashed rgb(161, 161, 161);
+                padding: 6px;
+                position: relative;
+                left: 100px;
+            }
+            #bunny {
+                width: 300px;
+                margin-right: 10px;
+                margin-bottom: 10px;
+                border: 6px ridge red;
+            }
+            #container {
+                width: 600px;
+                margin: auto;
+                border: 1px solid rgb(145, 0, 0);
+                border-top: 10px solid purple;
+                padding: 15px;
+            }
+            .image {
+                position: absolute;
+            }
+            .first-image {
+                top: 100px;
+                left: 10px;
+                z-index: 1;
+            }
+            .second-image {
+                top: 150px;
+                left: 50px;
+                z-index: 3;
+            }
+            .third-image {
+                top: 200px;
+                left: 100px;
+                z-index: 3;
+            }
+            #floating-image {
+                width: 50px;
+                float: left;
+                margin-right: 6px;
+                margin-bottom: 6px;
+            }
+            #sidebar {
+                float: right;
+                width: 30%;
+                margin-left: 10px;
+            }
+            #footer {
+                background-color: blue;
+                padding: 6px;
+                clear: both;
+            }
+        </style>
+    </head>
+    <body>
+      <div id="container">
+        <h1>Headline 1</h1>
+        <h2>Headline 2</h2>
+        <h3>Headline 3</h3>
+        <h4>Headline 4</h4>
+        <h5>Headline 5</h5>
+        <h6>Headline 6</h6>
+        <p id="unique-identifier-selector">
+            Line<br>
+            Break
+        </p>
+        <p>
+            <em>Italics</em>
+            <strong>Bold</strong>
+        </p>
+        <ul>
+            <li class="common-class-name-selector">Bullet 1</li>
+            <li>Bullet 2</li>
+        </ul>
+        <ol>
+            <li class="common-class-name-selector">Number 1</li>
+            <li>Number 2</li>
+        </ol>
+        <img src="https://www.kasandbox.org/programming-images/animals/rabbit.png"
+             class="image first-image"
+             alt="Caption"
+             width="200">
+        <img src="https://www.kasandbox.org/programming-images/animals/rabbit.png"
+             class="image second-image"
+             alt="Caption"
+             height="200">
+        <img id="bunny" src="https://www.kasandbox.org/programming-images/animals/rabbit.png"
+             class="image third-image"
+             alt="Caption">
+        <ul>
+            <li><a class="common-class-name-selector" target="_blank" href="https://en.wikipedia.org/wiki/Hyperlink">Hyperlink</a></li>
+            <li><a href="#unique-identifier-selector">Internal Link</a></li>
+        </ul>
+        <table>
+            <thead>
+                <tr>
+                    <th>Column Header 1</th>
+                    <th>Column Header 2</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Cell 1,1</td>
+                    <td>Cell 1,2</td>
+                </tr>
+                <tr>
+                    <td>Cell 2,1</td>
+                    <td>Cell 2,2</td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- Comment to describe your HTML code to a fellow programmer -->
+        <!-- Comment out parts of your HTML code
+        <h1>This element is not rendered</h1>
+        -->
+        <div class="box">
+            <p>A <span class="rosy">span</span> is an inline tag</p>
+            <div>A <div class="rosy">div</div> is a block tag</div>
+            <p>Go to <a href="https://www.lipsum.com">lipsum.com</a> to generate your own <em>Lorem ipsum</em> paragraph text like the following...</p>
+            <img src="https://www.kasandbox.org/programming-images/animals/rabbit.png"
+                 id="floating-image"
+                 alt="Caption">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dictum, libero id sodales molestie, tellus tortor tristique ligula, a dictum libero dui eget massa. Morbi commodo, ligula a tempor vulputate, ante felis dictum ex, sit amet feugiat lectus lorem nec nibh. Phasellus nisl elit, congue nec arcu quis, lacinia ullamcorper lacus. Fusce a turpis lorem. Cras nec est porta, vehicula lectus vel, sodales mauris. Sed porta porta diam, quis mattis quam dignissim non. Morbi vel diam mauris. Donec in nulla accumsan neque eleifend laoreet. Aliquam gravida eleifend rutrum. Donec lobortis imperdiet diam, vulputate porttitor augue ultrices elementum. Sed tincidunt erat arcu, eu sagittis libero iaculis in. Aliquam a nulla ultricies, semper urna ut, mattis turpis.</p>
+            <p id="sidebar">Vivamus luctus mattis elit. Aliquam non libero tristique, gravida eros nec, venenatis lorem. Aenean nisl enim, elementum et orci non, finibus vehicula justo. Pellentesque sed sapien mollis, faucibus ante sit amet, vehicula purus. Nunc felis urna, posuere eget condimentum sed, iaculis vel eros. Proin pulvinar sit amet nulla a finibus. Cras et arcu odio. Etiam accumsan felis vitae arcu sodales pulvinar. Morbi vehicula sodales neque nec dictum. Morbi orci orci, dignissim eu nibh id, congue dictum purus. Sed velit ligula, elementum ac tellus elementum, tempor viverra ante. Phasellus dapibus sit amet lorem sed mollis. Donec ut sapien elementum nulla aliquam placerat et in risus. Fusce egestas justo quam, vel ornare elit luctus quis. Maecenas a commodo mauris, sed hendrerit augue. Quisque consectetur molestie urna ac euismod.</p>
+            <p id="footer">Bottom of box</p>
+        </div>
+      </div>
+    </body>
+</html>
