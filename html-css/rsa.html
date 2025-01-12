@@ -3,99 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Understanding RSA with Simple Math</title>
+    <title>Explaining RSA to a 5th Grader</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
             margin: 0;
-            padding: 0 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
         }
         h1, h2 {
             color: #2c3e50;
         }
-        code {
-            background-color: #f4f4f4;
-            padding: 2px 4px;
-            border-radius: 4px;
+        p {
+            color: #34495e;
         }
         .example {
-            background: #ecf0f1;
-            padding: 10px;
-            margin: 10px 0;
+            background-color: #ecf0f1;
+            padding: 15px;
+            margin: 20px 0;
             border-left: 4px solid #3498db;
+        }
+        .important {
+            font-weight: bold;
+            color: #e74c3c;
         }
     </style>
 </head>
 <body>
-    <h1>Math in Computer Science: RSA</h1>
-    <p>The following is generated via ChatGPT using this prompt:</p>
-    <textarea rows="5" cols="80">Generate an html blog that will explain RSA using 5th grade math and provide examples using p=3 and q=5 as well as p=7 and q=11 in both cases using ascii value for letter m as the message to encode and decode.</textarea>
+    <h1>Explaining RSA Encryption to a 5th Grader</h1>
+    <p>Let’s imagine RSA encryption is like sending a secret message using <strong>locks and keys</strong>. Here’s how it works:</p>
 
-    <h1>Understanding RSA Encryption Using Simple Math</h1>
-    <p>Welcome to this blog post where we explain RSA encryption using simple math concepts, perfect for a 5th grader! RSA is a way to encode (hide) and decode (unhide) messages using numbers. Let’s dive in!</p>
+    <h2>1. Pick Two Secret Numbers (The Lock)</h2>
+    <p>Think of two numbers as your "locks." These numbers are special because they are <span class="important">prime numbers</span> (numbers that can only be divided by 1 and themselves). For example:</p>
+    <ul>
+        <li>One number might be <strong>3</strong>.</li>
+        <li>Another number might be <strong>5</strong>.</li>
+    </ul>
+    <p>We multiply these numbers together to create a bigger number. That big number becomes part of the lock!</p>
 
-    <h2>Step 1: Pick Two Prime Numbers</h2>
-    <p>A prime number is a number greater than 1 that can only be divided by 1 and itself. For example, <strong>2, 3, 5,</strong> and <strong>7</strong> are prime numbers.</p>
+    <h2>2. Share Part of Your Lock (The Public Key)</h2>
+    <p>You share the big number and another small number with your friends. This is called the <strong>public key</strong>. It’s like leaving a lock open but hiding the key to unlock it.</p>
 
-    <h2>Step 2: Multiply the Primes</h2>
-    <p>Let’s call the two prime numbers <code>p</code> and <code>q</code>. Multiply them together to get a number we call <code>n</code>.</p>
-    <p>For example:
+    <h2>3. Keep Your Key a Secret</h2>
+    <p>There’s a special math rule that creates a <span class="important">secret key</span>. Only you know this key. It’s like the magic that lets you unlock the lock you shared earlier.</p>
+
+    <h2>4. How to Send a Secret Message</h2>
+    <p>Your friend wants to send you a secret message, so they:</p>
+    <ol>
+        <li>Turn their message into numbers. For example, the letter "a" might be <strong>1</strong>, and "b" might be <strong>2</strong>.</li>
+        <li>They use your public lock (public key) to lock their message. Only your secret key can unlock it.</li>
+    </ol>
+
+    <h2>5. How to Unlock the Message</h2>
+    <p>When you get the message, you use your secret key to unlock it. The numbers turn back into letters, and now you can read the secret message!</p>
+
+    <div class="example">
+        <h3>A Fun Example</h3>
         <ul>
-            <li>If <code>p = 3</code> and <code>q = 5</code>, then <code>n = 3 × 5 = 15</code>.</li>
-            <li>If <code>p = 7</code> and <code>q = 11</code>, then <code>n = 7 × 11 = 77</code>.</li>
+            <li>You pick <strong>3</strong> and <strong>5</strong> as your secret numbers. The big number is <strong>3 × 5 = 15</strong>.</li>
+            <li>You share the number <strong>15</strong> and another small number (like <strong>3</strong>) with your friends.</li>
+            <li>Your friend writes the letter "m" (which is <strong>13</strong>) and uses the lock to scramble it into a new number, like <strong>4</strong>.</li>
+            <li>When you get the number <strong>4</strong>, you use your secret key to turn it back into <strong>13</strong> and read "m."</li>
         </ul>
-    </p>
-
-    <h2>Step 3: Find Another Number Called <code>e</code></h2>
-    <p>We need a number <code>e</code> that is smaller than <code>(p - 1) × (q - 1)</code> and doesn’t share any common factors with it (except 1). This might sound tricky, but it’s just picking a number that “works.”</p>
-    <p>For simplicity, let’s use <code>e = 3</code> for both examples.</p>
-
-    <h2>Step 4: Find a Special Number Called <code>d</code></h2>
-    <p>Next, we calculate <code>d</code>, which works like a secret key. It satisfies this equation:</p>
-    <p><code>(e × d) % ((p - 1) × (q - 1)) = 1</code></p>
-    <p>For example:
-        <ul>
-            <li>If <code>p = 3</code> and <code>q = 5</code>, then <code>(p - 1) × (q - 1) = 2 × 4 = 8</code>. Here, <code>d = 3</code> works because <code>(3 × 3) % 8 = 1</code>.</li>
-            <li>If <code>p = 7</code> and <code>q = 11</code>, then <code>(p - 1) × (q - 1) = 6 × 10 = 60</code>. Here, <code>d = 7</code> works because <code>(3 × 7) % 60 = 1</code>.</li>
-        </ul>
-    </p>
-
-    <h2>Step 5: Encode a Message</h2>
-    <p>Messages are turned into numbers using their ASCII values (every letter has a number). For example, the letter <code>m</code> is <code>109</code>.</p>
-    <p>To encode a message, use this formula:</p>
-    <p><code>Encoded = (Message<sup>e</sup>) % n</code></p>
-
-    <div class="example">
-        <p><strong>Example 1:</strong> Encode <code>m</code> (ASCII value 109) using <code>p = 3</code>, <code>q = 5</code>, and <code>e = 3</code>:</p>
-        <p><code>Encoded = (109<sup>3</sup>) % 15 = 4</code></p>
     </div>
 
-    <div class="example">
-        <p><strong>Example 2:</strong> Encode <code>m</code> (ASCII value 109) using <code>p = 7</code>, <code>q = 11</code>, and <code>e = 3</code>:</p>
-        <p><code>Encoded = (109<sup>3</sup>) % 77 = 62</code></p>
-    </div>
-
-    <h2>Step 6: Decode the Message</h2>
-    <p>To decode the message, use this formula:</p>
-    <p><code>Decoded = (Encoded<sup>d</sup>) % n</code></p>
-
-    <div class="example">
-        <p><strong>Example 1:</strong> Decode <code>4</code> using <code>p = 3</code>, <code>q = 5</code>, and <code>d = 3</code>:</p>
-        <p><code>Decoded = (4<sup>3</sup>) % 15 = 109</code>, which is the ASCII value for <code>m</code>.</p>
-    </div>
-
-    <div class="example">
-        <p><strong>Example 2:</strong> Decode <code>62</code> using <code>p = 7</code>, <code>q = 11</code>, and <code>d = 7</code>:</p>
-        <p><code>Decoded = (62<sup>7</sup>) % 77 = 109</code>, which is the ASCII value for <code>m</code>.</p>
-    </div>
-
-    <h2>Important Note:</h2>
-    <p>In practice, RSA works best when the message is smaller than <code>n</code>. In this example, the numbers worked well because the message (109) is smaller than both <code>n</code> values.</p>
+    <h2>Why Is It Cool?</h2>
+    <p>Even if someone sees the public lock (the big number), they can’t figure out your secret key easily because math is tricky like that. It’s a great way to keep secrets safe!</p>
 
     <h2>Congratulations!</h2>
-    <p>You’ve just learned the basics of RSA encryption. Remember, in the real world, the numbers are much larger to make it super secure. But the steps are the same!</p>
+    <p>You’ve just learned how RSA encryption works in a simple way. It’s like a magic trick with numbers, but it’s super important for keeping things private on the internet!</p>
 </body>
 </html>
-
-
