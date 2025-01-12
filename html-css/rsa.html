@@ -41,7 +41,7 @@
     <p>
         RSA is a type of encryption used to keep information secure that requires a public key that you can share and a private key that you keep secret.
         It's based on some math concepts that are actually easier to understand than they first seem.
-        Let’s break it down step by step where our goal is to generate the public (e, n) and private (d, n) keys and then use them to encrypt and decrypt a message.
+        Let's break it down step by step where our goal is to generate the public (e, n) and private (d, n) keys and then use them to encrypt and decrypt a message.
     </p>
 
     <div class="section">
@@ -104,14 +104,14 @@
     <div class="section">
         <h2>6. Find the Private Exponent (d)</h2>
         <p>
-            Now we need to find d, the private key. It’s the number that “undoes” the encryption done by e.
+            Now we need to find d, the private key. It's the number that “undoes” the encryption done by e.
             To find d, we need to solve the following equation:
         </p>
         <div class="code">
             d × e ≡ 1 (mod φ(n))
         </div>
         <p>This means we need d such that when you multiply d by e and divide by φ(n), the remainder is 1.</p>
-        <p>This can be found using some trial and error or using an extended version of the Euclidean algorithm.</p>
+        <p>This can be found using some trial and error or using an Extended Euclidean Algorithm.</p>
         <p>For e = 7 and φ(n) = 160, we find that 23 x 7 is 161 which divided by 160 leaves remainder 1. Therefore:</p>
         <div class="code">
             d = 23
@@ -129,17 +129,17 @@
 
     <div class="section">
         <h2>8. Encrypting a Message</h2>
-        <p>To encrypt a message, we first turn it into a number. Let’s say we convert a message into numbers using A = 1, B = 2, etc. Let's say our message is M:</p>
+        <p>To encrypt a message, we first turn it into a number. Let's say we convert a message into numbers using A = 1, B = 2, etc. Let's say our message is M:</p>
         <div class="code">
             M = 13
         </div>
         <p>To encrypt, use the formula:</p>
         <div class="code">
-            C = M^e mod n
+            C = M<sup>e</sup> mod n
         </div>
         <p>So for M = 13, e = 7, and n = 187:</p>
         <div class="code">
-            C = 13^7 mod 187 = 62,748,517 mod 187 = 106
+            C = 13<sup>7</sup> mod 187 = 62,748,517 mod 187 = 106
         </div>
         <p>The encrypted message is <strong>C = 106</strong>.</p>
     </div>
@@ -148,14 +148,14 @@
         <h2>9. Decrypting the Message</h2>
         <p>To decrypt, we use the private key:</p>
         <div class="code">
-            M = C^d mod n
+            M = C<sup>d</sup> mod n
         </div>
         <p>So for C = 106, d = 23, and n = 187:</p>
         <div class="code">
-            M = 106^23 mod 187
+            M = 106<sup>23</sup> mod 187
         </div>
         <p>
-            To calculate 106^23 mod 187, we can use exponentiation by squaring
+            To calculate, we can use exponentiation by squaring
             where we can break down the exponentiation process efficiently by using the binary expansion of the exponent 23.
         </p>
         <p>First, write the exponent 23 in binary form:</p>
@@ -182,7 +182,7 @@
         </div>
         <p>Finally, the result is:</p>
         <div class="code">
-            M = 106^23 mod 187 = 103 × 69 × 16 × 106 = 13
+            M = 106<sup>23</sup> mod 187 = 103 × 69 × 16 × 106 = 13
         </div>
         <p>The original message is <strong>M = 13</strong>.</p>
     </div>
