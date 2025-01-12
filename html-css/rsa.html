@@ -28,37 +28,6 @@
     </style>
 </head>
 <body>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Understanding RSA with Simple Math</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0 20px;
-        }
-        h1, h2 {
-            color: #2c3e50;
-        }
-        code {
-            background-color: #f4f4f4;
-            padding: 2px 4px;
-            border-radius: 4px;
-        }
-        .example {
-            background: #ecf0f1;
-            padding: 10px;
-            margin: 10px 0;
-            border-left: 4px solid #3498db;
-        }
-    </style>
-</head>
-<body>
     <h1>Math in Computer Science: RSA</h1>
     <p>The following is generated via ChatGPT using this prompt:</p>
     <textarea rows="5" cols="80">Generate an html blog that will explain RSA using 5th grade math and provide examples using p=3 and q=5 as well as p=7 and q=11 in both cases using ascii value for letter m as the message to encode and decode.</textarea>
@@ -74,12 +43,13 @@
     <p>For example:
         <ul>
             <li>If <code>p = 3</code> and <code>q = 5</code>, then <code>n = 3 × 5 = 15</code>.</li>
+            <li>If <code>p = 7</code> and <code>q = 11</code>, then <code>n = 7 × 11 = 77</code>.</li>
         </ul>
     </p>
 
     <h2>Step 3: Find Another Number Called <code>e</code></h2>
     <p>We need a number <code>e</code> that is smaller than <code>(p - 1) × (q - 1)</code> and doesn’t share any common factors with it (except 1). This might sound tricky, but it’s just picking a number that “works.”</p>
-    <p>For simplicity, let’s use <code>e = 3</code>.</p>
+    <p>For simplicity, let’s use <code>e = 3</code> for both examples.</p>
 
     <h2>Step 4: Find a Special Number Called <code>d</code></h2>
     <p>Next, we calculate <code>d</code>, which works like a secret key. It satisfies this equation:</p>
@@ -87,17 +57,23 @@
     <p>For example:
         <ul>
             <li>If <code>p = 3</code> and <code>q = 5</code>, then <code>(p - 1) × (q - 1) = 2 × 4 = 8</code>. Here, <code>d = 3</code> works because <code>(3 × 3) % 8 = 1</code>.</li>
+            <li>If <code>p = 7</code> and <code>q = 11</code>, then <code>(p - 1) × (q - 1) = 6 × 10 = 60</code>. Here, <code>d = 7</code> works because <code>(3 × 7) % 60 = 1</code>.</li>
         </ul>
     </p>
 
     <h2>Step 5: Encode a Message</h2>
-    <p>Messages are turned into numbers using their ASCII values (every letter has a number). For example, the letter <code>M</code> is <code>77</code>.</p>
+    <p>Messages are turned into numbers using their ASCII values (every letter has a number). For example, the letter <code>m</code> is <code>109</code>.</p>
     <p>To encode a message, use this formula:</p>
     <p><code>Encoded = (Message<sup>e</sup>) % n</code></p>
 
     <div class="example">
-        <p><strong>Example:</strong> Encode <code>M</code> (ASCII value 77) using <code>p = 3</code>, <code>q = 5</code>, and <code>e = 3</code>:</p>
-        <p><code>Encoded = (77<sup>3</sup>) % 15 = 13</code></p>
+        <p><strong>Example 1:</strong> Encode <code>m</code> (ASCII value 109) using <code>p = 3</code>, <code>q = 5</code>, and <code>e = 3</code>:</p>
+        <p><code>Encoded = (109<sup>3</sup>) % 15 = 4</code></p>
+    </div>
+
+    <div class="example">
+        <p><strong>Example 2:</strong> Encode <code>m</code> (ASCII value 109) using <code>p = 7</code>, <code>q = 11</code>, and <code>e = 3</code>:</p>
+        <p><code>Encoded = (109<sup>3</sup>) % 77 = 62</code></p>
     </div>
 
     <h2>Step 6: Decode the Message</h2>
@@ -105,12 +81,21 @@
     <p><code>Decoded = (Encoded<sup>d</sup>) % n</code></p>
 
     <div class="example">
-        <p><strong>Example:</strong> Decode <code>13</code> using <code>p = 3</code>, <code>q = 5</code>, and <code>d = 3</code>:</p>
-        <p><code>Decoded = (13<sup>3</sup>) % 15 = 77</code>, which is the ASCII value for <code>M</code>.</p>
+        <p><strong>Example 1:</strong> Decode <code>4</code> using <code>p = 3</code>, <code>q = 5</code>, and <code>d = 3</code>:</p>
+        <p><code>Decoded = (4<sup>3</sup>) % 15 = 109</code>, which is the ASCII value for <code>m</code>.</p>
     </div>
+
+    <div class="example">
+        <p><strong>Example 2:</strong> Decode <code>62</code> using <code>p = 7</code>, <code>q = 11</code>, and <code>d = 7</code>:</p>
+        <p><code>Decoded = (62<sup>7</sup>) % 77 = 109</code>, which is the ASCII value for <code>m</code>.</p>
+    </div>
+
+    <h2>Important Note:</h2>
+    <p>In practice, RSA works best when the message is smaller than <code>n</code>. In this example, the numbers worked well because the message (109) is smaller than both <code>n</code> values.</p>
 
     <h2>Congratulations!</h2>
     <p>You’ve just learned the basics of RSA encryption. Remember, in the real world, the numbers are much larger to make it super secure. But the steps are the same!</p>
 </body>
 </html>
+
 
