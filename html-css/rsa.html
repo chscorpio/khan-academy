@@ -3,20 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Explaining RSA to a 5th Grader</title>
+    <title>RSA Explained for 5th Graders</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
-            margin: 0;
-            padding: 20px;
+            margin: 20px;
+            padding: 0;
             background-color: #f9f9f9;
         }
         h1, h2 {
             color: #2c3e50;
         }
-        p {
+        p, ul, li {
             color: #34495e;
+        }
+        code {
+            background-color: #ecf0f1;
+            padding: 2px 4px;
+            border-radius: 4px;
         }
         .example {
             background-color: #ecf0f1;
@@ -31,45 +36,65 @@
     </style>
 </head>
 <body>
-    <h1>Explaining RSA Encryption to a 5th Grader</h1>
+    <h1>RSA Encryption Explained for 5th Graders</h1>
     <p>Let’s imagine RSA encryption is like sending a secret message using <strong>locks and keys</strong>. Here’s how it works:</p>
 
-    <h2>1. Pick Two Secret Numbers (The Lock)</h2>
-    <p>Think of two numbers as your "locks." These numbers are special because they are <span class="important">prime numbers</span> (numbers that can only be divided by 1 and themselves). For example:</p>
+    <h2>Step 1: Pick Two Secret Numbers</h2>
+    <p>You and your friend each choose two <span class="important">special numbers</span> called <strong>prime numbers</strong>. Prime numbers are numbers that can only be divided by 1 and themselves. For example:</p>
     <ul>
-        <li>One number might be <strong>3</strong>.</li>
-        <li>Another number might be <strong>5</strong>.</li>
+        <li><strong>2, 3, 5, 7, 11,</strong> and <strong>13</strong>.</li>
     </ul>
-    <p>We multiply these numbers together to create a bigger number. That big number becomes part of the lock!</p>
+    <p>Let’s pick two small ones to make it easy:</p>
+    <ul>
+        <li><code>p = 3</code></li>
+        <li><code>q = 5</code></li>
+    </ul>
 
-    <h2>2. Share Part of Your Lock (The Public Key)</h2>
-    <p>You share the big number and another small number with your friends. This is called the <strong>public key</strong>. It’s like leaving a lock open but hiding the key to unlock it.</p>
+    <h2>Step 2: Multiply Them</h2>
+    <p>Now, multiply these two numbers together. This gives you a big number called <code>n</code>:</p>
+    <p><code>n = p × q = 3 × 5 = 15</code></p>
+    <p>This number is part of your "lock."</p>
 
-    <h2>3. Keep Your Key a Secret</h2>
-    <p>There’s a special math rule that creates a <span class="important">secret key</span>. Only you know this key. It’s like the magic that lets you unlock the lock you shared earlier.</p>
+    <h2>Step 3: Find Another Number Called <code>e</code></h2>
+    <p>Pick a number <code>e</code> that is smaller than <code>(p - 1) × (q - 1)</code>, and make sure it doesn’t share any factors with <code>(p - 1) × (q - 1)</code>. Don’t worry too much—just pick one that works. For our example:</p>
+    <p><code>(p - 1) × (q - 1) = 2 × 4 = 8</code></p>
+    <p>We pick <code>e = 3</code> because it works.</p>
 
-    <h2>4. How to Send a Secret Message</h2>
-    <p>Your friend wants to send you a secret message, so they:</p>
-    <ol>
-        <li>Turn their message into numbers. For example, the letter "a" might be <strong>1</strong>, and "b" might be <strong>2</strong>.</li>
-        <li>They use your public lock (public key) to lock their message. Only your secret key can unlock it.</li>
-    </ol>
+    <h2>Step 4: Share the Lock</h2>
+    <p>You now share the numbers <code>n</code> and <code>e</code> with your friend. These are like the "lock" that anyone can use. But keep <code>p</code> and <code>q</code> secret—those are your keys.</p>
 
-    <h2>5. How to Unlock the Message</h2>
-    <p>When you get the message, you use your secret key to unlock it. The numbers turn back into letters, and now you can read the secret message!</p>
-
+    <h2>Step 5: Use Math to Lock the Message</h2>
+    <p>Turn your message into a number. Every letter has a number using ASCII (like a secret code). For example:</p>
+    <ul>
+        <li>The letter "m" is <code>109</code>.</li>
+    </ul>
+    <p>To lock the message, use this formula:</p>
+    <p><code>Locked Message = (Message<sup>e</sup>) % n</code></p>
     <div class="example">
-        <h3>A Fun Example</h3>
+        <p><strong>Example:</strong></p>
         <ul>
-            <li>You pick <strong>3</strong> and <strong>5</strong> as your secret numbers. The big number is <strong>3 × 5 = 15</strong>.</li>
-            <li>You share the number <strong>15</strong> and another small number (like <strong>3</strong>) with your friends.</li>
-            <li>Your friend writes the letter "m" (which is <strong>13</strong>) and uses the lock to scramble it into a new number, like <strong>4</strong>.</li>
-            <li>When you get the number <strong>4</strong>, you use your secret key to turn it back into <strong>13</strong> and read "m."</li>
+            <li><code>Locked Message = (109<sup>3</sup>) % 15</code></li>
+            <li><code>109<sup>3</sup> = 1,295,029</code></li>
+            <li>Divide <code>1,295,029</code> by <code>15</code>. The remainder is <strong>14</strong>.</li>
         </ul>
+        <p>So, the locked message is <code>14</code>.</p>
     </div>
 
+    <h2>Step 6: Use a Secret Key to Unlock It</h2>
+    <p>Your friend has a special "key" (called <code>d</code>) that only they know. They use it to unlock the message with another formula:</p>
+    <p><code>Original Message = (Locked Message<sup>d</sup>) % n</code></p>
+    <p>Using their secret math magic, they get back <code>109</code>, which is the number for "m."</p>
+
     <h2>Why Is It Cool?</h2>
-    <p>Even if someone sees the public lock (the big number), they can’t figure out your secret key easily because math is tricky like that. It’s a great way to keep secrets safe!</p>
+    <p>Even if someone else sees the locked message and the lock (the numbers <code>n</code> and <code>e</code>), they can’t figure out the secret message without the key <code>d</code>. It’s like a puzzle that only you and your friend can solve!</p>
+
+    <h2>In Real Life</h2>
+    <p>In the real world, RSA uses <span class="important">HUGE</span> prime numbers to make it super secure. But the steps are the same:</p>
+    <ol>
+        <li>Pick secret numbers.</li>
+        <li>Share the lock.</li>
+        <li>Use math to lock and unlock messages.</li>
+    </ol>
 
     <h2>Congratulations!</h2>
     <p>You’ve just learned how RSA encryption works in a simple way. It’s like a magic trick with numbers, but it’s super important for keeping things private on the internet!</p>
