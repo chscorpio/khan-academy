@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding RSA with Simple Math</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0 20px;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+        .example {
+            background: #ecf0f1;
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #3498db;
+        }
+    </style>
+</head>
+<body>
+    <h1>Understanding RSA Encryption Using Simple Math</h1>
+    <p>Welcome to this blog post where we explain RSA encryption using simple math concepts, perfect for a 5th grader! RSA is a way to encode (hide) and decode (unhide) messages using numbers. Let’s dive in!</p>
+
+    <h2>Step 1: Pick Two Prime Numbers</h2>
+    <p>A prime number is a number greater than 1 that can only be divided by 1 and itself. For example, <strong>2, 3, 5, 7,</strong> and <strong>11</strong> are prime numbers.</p>
+
+    <h2>Step 2: Multiply the Primes</h2>
+    <p>Let’s call the two prime numbers <code>p</code> and <code>q</code>. Multiply them together to get a number we call <code>n</code>.</p>
+    <p>For example:
+        <ul>
+            <li>If <code>p = 3</code> and <code>q = 5</code>, then <code>n = 3 × 5 = 15</code>.</li>
+            <li>If <code>p = 7</code> and <code>q = 11</code>, then <code>n = 7 × 11 = 77</code>.</li>
+        </ul>
+    </p>
+
+    <h2>Step 3: Find Another Number Called <code>e</code></h2>
+    <p>We need a number <code>e</code> that is smaller than <code>(p - 1) × (q - 1)</code> and doesn’t share any common factors with it (except 1). This might sound tricky, but it’s just picking a number that “works.”</p>
+    <p>For simplicity, let’s use <code>e = 3</code>.</p>
+
+    <h2>Step 4: Find a Special Number Called <code>d</code></h2>
+    <p>Next, we calculate <code>d</code>, which works like a secret key. It satisfies this equation:</p>
+    <p><code>(e × d) % ((p - 1) × (q - 1)) = 1</code></p>
+    <p>For example:
+        <ul>
+            <li>If <code>p = 3</code> and <code>q = 5</code>, then <code>(p - 1) × (q - 1) = 2 × 4 = 8</code>. Here, <code>d = 7</code> works because <code>(3 × 7) % 8 = 1</code>.</li>
+            <li>If <code>p = 7</code> and <code>q = 11</code>, then <code>(p - 1) × (q - 1) = 6 × 10 = 60</code>. Here, <code>d = 7</code> works because <code>(3 × 7) % 60 = 1</code>.</li>
+        </ul>
+    </p>
+
+    <h2>Step 5: Encode a Message</h2>
+    <p>Messages are turned into numbers using their ASCII values (every letter has a number). For example, the letter <code>A</code> is <code>65</code>, <code>B</code> is <code>66</code>, and so on.</p>
+    <p>To encode a message, use this formula:</p>
+    <p><code>Encoded = (Message<sup>e</sup>) % n</code></p>
+
+    <div class="example">
+        <p><strong>Example 1:</strong> Encode <code>M</code> (ASCII value 77) using <code>p = 3</code>, <code>q = 5</code>, and <code>e = 3</code>:</p>
+        <p><code>Encoded = (77<sup>3</sup>) % 15 = 13</code></p>
+    </div>
+
+    <div class="example">
+        <p><strong>Example 2:</strong> Encode <code>M</code> (ASCII value 77) using <code>p = 7</code>, <code>q = 11</code>, and <code>e = 3</code>:</p>
+        <p><code>Encoded = (77<sup>3</sup>) % 77 = 36</code></p>
+    </div>
+
+    <h2>Step 6: Decode the Message</h2>
+    <p>To decode the message, use this formula:</p>
+    <p><code>Decoded = (Encoded<sup>d</sup>) % n</code></p>
+
+    <div class="example">
+        <p><strong>Example 1:</strong> Decode <code>13</code> using <code>p = 3</code>, <code>q = 5</code>, and <code>d = 7</code>:</p>
+        <p><code>Decoded = (13<sup>7</sup>) % 15 = 77</code>, which is the ASCII value for <code>M</code>.</p>
+    </div>
+
+    <div class="example">
+        <p><strong>Example 2:</strong> Decode <code>36</code> using <code>p = 7</code>, <code>q = 11</code>, and <code>d = 7</code>:</p>
+        <p><code>Decoded = (36<sup>7</sup>) % 77 = 77</code>, which is the ASCII value for <code>M</code>.</p>
+    </div>
+
+    <h2>Congratulations!</h2>
+    <p>You’ve just learned the basics of RSA encryption. Remember, in the real world, the numbers are much larger to make it super secure. But the steps are the same!</p>
+</body>
+</html>
