@@ -3,100 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RSA Explained for 5th Graders</title>
+    <title>RSA Encryption Explained</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
             margin: 20px;
             padding: 0;
-            background-color: #f9f9f9;
+            background-color: #f4f4f4;
         }
-        h1, h2 {
-            color: #2c3e50;
+        h1 {
+            text-align: center;
+            color: #333;
         }
-        p, ul, li {
-            color: #34495e;
+        .section {
+            margin: 20px;
+            padding: 10px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-        code {
-            background-color: #ecf0f1;
-            padding: 2px 4px;
-            border-radius: 4px;
+        .section h2 {
+            color: #555;
         }
-        .example {
-            background-color: #ecf0f1;
-            padding: 15px;
-            margin: 20px 0;
-            border-left: 4px solid #3498db;
-        }
-        .important {
-            font-weight: bold;
-            color: #e74c3c;
+        .code {
+            background-color: #f1f1f1;
+            border-left: 4px solid #2196F3;
+            padding: 10px;
+            font-family: "Courier New", Courier, monospace;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
-    <h1>RSA Encryption Explained for 5th Graders</h1>
-    <p>Let’s imagine RSA encryption is like sending a secret message using <strong>locks and keys</strong>. Here’s how it works:</p>
 
-    <h2>Step 1: Pick Two Secret Numbers</h2>
-    <p>You and your friend each choose two <span class="important">special numbers</span> called <strong>prime numbers</strong>. Prime numbers are numbers that can only be divided by 1 and themselves. For example:</p>
-    <ul>
-        <li><strong>2, 3, 5, 7, 11,</strong> and <strong>13</strong>.</li>
-    </ul>
-    <p>Let’s pick two small ones to make it easy:</p>
-    <ul>
-        <li><code>p = 3</code></li>
-        <li><code>q = 5</code></li>
-    </ul>
+    <h1>Understanding RSA Encryption (Junior High Math)</h1>
 
-    <h2>Step 2: Multiply Them</h2>
-    <p>Now, multiply these two numbers together. This gives you a big number called <code>n</code>:</p>
-    <p><code>n = p × q = 3 × 5 = 15</code></p>
-    <p>This number is part of your "lock."</p>
-
-    <h2>Step 3: Find Another Number Called <code>e</code></h2>
-    <p>Pick a number <code>e</code> that is smaller than <code>(p - 1) × (q - 1)</code>, and make sure it doesn’t share any factors with <code>(p - 1) × (q - 1)</code>. Don’t worry too much—just pick one that works. For our example:</p>
-    <p><code>(p - 1) × (q - 1) = 2 × 4 = 8</code></p>
-    <p>We pick <code>e = 3</code> because it works.</p>
-
-    <h2>Step 4: Share the Lock</h2>
-    <p>You now share the numbers <code>n</code> and <code>e</code> with your friend. These are like the "lock" that anyone can use. But keep <code>p</code> and <code>q</code> secret—those are your keys.</p>
-
-    <h2>Step 5: Use Math to Lock the Message</h2>
-    <p>Turn your message into a number. Every letter has a number using ASCII (like a secret code). For example:</p>
-    <ul>
-        <li>The letter "m" is <code>109</code>.</li>
-    </ul>
-    <p>To lock the message, use this formula:</p>
-    <p><code>Locked Message = (Message<sup>e</sup>) % n</code></p>
-    <div class="example">
-        <p><strong>Example:</strong></p>
-        <ul>
-            <li><code>Locked Message = (109<sup>3</sup>) % 15</code></li>
-            <li><code>109<sup>3</sup> = 1,295,029</code></li>
-            <li>Divide <code>1,295,029</code> by <code>15</code>. The remainder is <strong>14</strong>.</li>
-        </ul>
-        <p>So, the locked message is <code>14</code>.</p>
+    <div class="section">
+        <h2>1. Prime Numbers</h2>
+        <p>Prime numbers are numbers that are only divisible by 1 and themselves. For example:</p>
+        <div class="code">
+            2, 3, 5, 7, 11, 13, 17, 19, ...
+        </div>
     </div>
 
-    <h2>Step 6: Use a Secret Key to Unlock It</h2>
-    <p>Your friend has a special "key" (called <code>d</code>) that only they know. They use it to unlock the message with another formula:</p>
-    <p><code>Original Message = (Locked Message<sup>d</sup>) % n</code></p>
-    <p>Using their secret math magic, they get back <code>109</code>, which is the number for "m."</p>
+    <div class="section">
+        <h2>2. Choose Two Prime Numbers</h2>
+        <p>RSA works by picking two prime numbers. Let's choose:</p>
+        <div class="code">
+            p = 11, q = 17
+        </div>
+    </div>
 
-    <h2>Why Is It Cool?</h2>
-    <p>Even if someone else sees the locked message and the lock (the numbers <code>n</code> and <code>e</code>), they can’t figure out the secret message without the key <code>d</code>. It’s like a puzzle that only you and your friend can solve!</p>
+    <div class="section">
+        <h2>3. Find n</h2>
+        <p>Now, we multiply p and q to get n:</p>
+        <div class="code">
+            n = p × q = 11 × 17 = 187
+        </div>
+        <p>n is part of both the public and private keys.</p>
+    </div>
 
-    <h2>In Real Life</h2>
-    <p>In the real world, RSA uses <span class="important">HUGE</span> prime numbers to make it super secure. But the steps are the same:</p>
-    <ol>
-        <li>Pick secret numbers.</li>
-        <li>Share the lock.</li>
-        <li>Use math to lock and unlock messages.</li>
-    </ol>
+    <div class="section">
+        <h2>4. Find Euler's Totient (φ(n))</h2>
+        <p>Euler's Totient is calculated using the formula:</p>
+        <div class="code">
+            φ(n) = (p - 1) × (q - 1) = (11 - 1) × (17 - 1) = 10 × 16 = 160
+        </div>
+    </div>
 
-    <h2>Congratulations!</h2>
-    <p>You’ve just learned how RSA encryption works in a simple way. It’s like a magic trick with numbers, but it’s super important for keeping things private on the internet!</p>
+    <div class="section">
+        <h2>5. Choose the Public Exponent (e)</h2>
+        <p>Choose an e (public exponent) such that e is smaller than φ(n) and does not share any factors with φ(n) (other than 1). Let's choose:</p>
+        <div class="code">
+            e = 7
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>6. Find the Private Exponent (d)</h2>
+        <p>Now, find d, the private exponent, which satisfies:</p>
+        <div class="code">
+            d × e ≡ 1 (mod φ(n))
+        </div>
+        <p>For e = 7 and φ(n) = 160, we find that:</p>
+        <div class="code">
+            d = 23
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>7. Public and Private Keys</h2>
+        <p>Now, we have:</p>
+        <ul>
+            <li>Public Key: (e, n) = (7, 187)</li>
+            <li>Private Key: (d, n) = (23, 187)</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>8. Encrypting a Message</h2>
+        <p>To encrypt a message, convert it into a number. Let's say our message is:</p>
+        <div class="code">
+            M = 8
+        </div>
+        <p>To encrypt, use the formula:</p>
+        <div class="code">
+            C = M^e mod n = 8^7 mod 187 = 48
+        </div>
+        <p>The encrypted message is <strong>C = 48</strong>.</p>
+    </div>
+
+    <div class="section">
+        <h2>9. Decrypting the Message</h2>
+        <p>To decrypt, we use the private key:</p>
+        <div class="code">
+            M = C^d mod n = 48^23 mod 187 = 8
+        </div>
+        <p>The original message is <strong>M = 8</strong>.</p>
+    </div>
+
+    <div class="section">
+        <h2>Summary</h2>
+        <p>RSA works by using two prime numbers to generate keys. The public key encrypts the message, and the private key decrypts it. Even if someone knows the public key, they can't easily figure out the private key because of the math involved.</p>
+    </div>
+
 </body>
 </html>
