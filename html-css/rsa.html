@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSA Encryption Explained</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .section {
+            margin: 20px;
+            padding: 10px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .section h2 {
+            color: #555;
+        }
+        .code {
+            background-color: #f1f1f1;
+            border-left: 4px solid #2196F3;
+            padding: 10px;
+            font-family: "Courier New", Courier, monospace;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Understanding RSA Encryption</h1>
+    <p>
+        RSA is a type of encryption used to keep information secure that requires a public key that you can share and a private key that you keep secret.
+        It's based on some math concepts that are actually easier to understand than they first seem.
+        Let's break it down step by step where our goal is to generate the public (e, n) and private (d, n) keys and then use them to encrypt and decrypt a message.
+    </p>
+
+    <div class="section">
+        <h2>1. Prime Numbers</h2>
+        <p>First, you need to know about prime numbers. Prime numbers are numbers that are only divisible by 1 and themselves. For example:</p>
+        <div class="code">
+            2, 3, 5, 7, 11, 13, 17, 19, ...
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>2. Choose Two Prime Numbers</h2>
+        <p>RSA uses two big prime numbers to create a key. Let's say we pick two prime numbers, p and q. For example:</p>
+        <div class="code">
+            p = 11, q = 17
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>3. Calculate n</h2>
+        <p>Now, we multiply p and q to get n:</p>
+        <div class="code">
+            n = p × q = 11 × 17 = 187
+        </div>
+        <p>n is part of both the public and private keys.</p>
+    </div>
+
+    <div class="section">
+        <h2>4. Find Euler's Totient (φ(n))</h2>
+        <p>
+            Euler's Totient is a fancy term, but it's simple to calculate.
+            It's basically a count of how many numbers are less than n and are relatively prime to n
+            (this means they don't share any factors other than 1 with n).
+            Euler's Totient is calculated using the formula:
+        </p>
+        <div class="code">
+            φ(n) = (p - 1) × (q - 1) = (11 - 1) × (17 - 1) = 10 × 16 = 160
+        </div>
+        <p>For p = 11 and q = 17:</p>
+        <div class="code">
+            φ(n) = (11 - 1) × (17 - 1) = 10 × 16 = 160
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>5. Choose the Public Exponent (e)</h2>
+        <p>
+            Now we choose a number e (called the public exponent), which is used for encryption.
+            It needs to be a number that is smaller than φ(n) and doesn't share any factors with φ(n) (other than 1).
+        </p>
+        <p>
+            For example, 7 is smaller than 160 and doesn't share any factors with 160 (other than 1).
+            Let's choose:
+        </p>
+        <div class="code">
+            e = 7
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>6. Find the Private Exponent (d)</h2>
+        <p>
+            Now we need to find d, the private key. It's the number that “undoes” the encryption done by e.
+            To find d, we need to solve the following equation:
+        </p>
+        <div class="code">
+            d × e ≡ 1 (mod φ(n))
+        </div>
+        <p>This means we need d such that when you multiply d by e and divide by φ(n), the remainder is 1.</p>
+        <p>This can be found using some trial and error or using an Extended Euclidean Algorithm.</p>
+        <p>For e = 7 and φ(n) = 160, we find that 23 x 7 is 161 which divided by 160 leaves remainder 1. Therefore:</p>
+        <div class="code">
+            d = 23
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>7. Public and Private Keys</h2>
+        <p>Now, we have:</p>
+        <ul>
+            <li>Public Key: (e, n) = (7, 187)</li>
+            <li>Private Key: (d, n) = (23, 187)</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>8. Encrypting a Message</h2>
+        <p>To encrypt a message, we first turn it into a number. Let's say we convert a message into numbers using A = 1, B = 2, etc. Let's say our message is M:</p>
+        <div class="code">
+            M = 13
+        </div>
+        <p>To encrypt, use the formula:</p>
+        <div class="code">
+            C = M<sup>e</sup> mod n
+        </div>
+        <p>So for M = 13, e = 7, and n = 187:</p>
+        <div class="code">
+            C = 13<sup>7</sup> mod 187 = 62,748,517 mod 187 = 106
+        </div>
+        <p>The encrypted message is <strong>C = 106</strong>.</p>
+    </div>
+
+    <div class="section">
+        <h2>9. Decrypting the Message</h2>
+        <p>To decrypt, we use the private key:</p>
+        <div class="code">
+            M = C<sup>d</sup> mod n
+        </div>
+        <p>So for C = 106, d = 23, and n = 187:</p>
+        <div class="code">
+            M = 106<sup>23</sup> mod 187
+        </div>
+        <p>
+            To calculate, we can use exponentiation by squaring
+            where we can break down the exponentiation process efficiently by using the binary expansion of the exponent 23.
+        </p>
+        <p>First, write the exponent 23 in binary form:</p>
+        <div class="code">
+            23 = 10111<sub>2</sub>
+        </div>
+        <p>This binary expansion represents:</p>
+        <div class="code">
+            23 = 2<sup>4</sup> + 2<sup>2</sup> + 2<sup>1</sup> + 2<sup>0</sup>
+            <br>
+            23 = 16 + 4 + 2 + 1
+        </div>
+        <p>Now, we calculate powers of 106 modulo 187 by squaring the base:</p>
+        <ul>
+            <li>106<sup>1</sup> mod 187 = 106</li>
+            <li>106<sup>2</sup> mod 187 = 16</li>
+            <li>106<sup>4</sup> mod 187 = 16<sup>2</sup> mod 187 = 69</li>
+            <li>106<sup>8</sup> mod 187 = 69<sup>2</sup> mod 187 = 86</li>
+            <li>106<sup>16</sup> mod 187 = 86<sup>2</sup> mod 187 = 103</li>
+        </ul>
+        <p>Using the binary decomposition of 23, we multiply the appropriate powers of 106 together:</p>
+        <div class="code">
+            106<sup>23</sup> = 106<sup>16</sup> × 106<sup>4</sup> × 106<sup>2</sup> × 106<sup>1</sup>
+            <br>
+            106<sup>23</sup> = 103 × 69 × 16 × 106
+        </div>
+        <p>Finally, the result is:</p>
+        <div class="code">
+            M = 106<sup>23</sup> mod 187
+            <br>
+            M = (103 × 69 × 16 × 106) mod 187
+            <br>
+            M = 12,053,472 mod 187
+            <br>
+            M = 13
+        </div>
+        <p>The original message is <strong>M = 13</strong>.</p>
+    </div>
+
+    <div class="section">
+        <h2>Summary</h2>
+        <p>RSA works by using two prime numbers to generate keys. The public key encrypts the message, and the private key decrypts it. Even if someone knows the public key, they can't easily figure out the private key because of the math involved.</p>
+    </div>
+
+</body>
+</html>
