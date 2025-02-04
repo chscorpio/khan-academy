@@ -7,6 +7,7 @@
     <style>
         body {
             display: flex;
+	    flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -15,25 +16,34 @@
         .rainbow-button {
             font-size: 20px;
             padding: 15px 30px;
+            margin: 15px;
             border: none;
             cursor: pointer;
             color: white;
-            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet, red, orange, yellow);
             background-size: 400% 400%;
             border-radius: 10px;
             transition: 0.3s;
         }
-        .rainbow-button:hover {
-            animation: rainbow 1.5s linear infinite;
+        .bounce:hover {
+            animation: rainbow-bounce 1.5s linear infinite;
         }
-        @keyframes rainbow {
+        .infinite:hover {
+            animation: rainbow-infinite 1.5s linear infinite;
+        }
+        @keyframes rainbow-bounce {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
+        @keyframes rainbow-infinite {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+	}
     </style>
 </head>
 <body>
-    <button class="rainbow-button">Hover Me</button>
+    <button class="rainbow-button bounce">Hover Me</button>
+    <button class="rainbow-button infinite">Hover Me</button>
 </body>
 </html>
